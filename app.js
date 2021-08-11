@@ -12,13 +12,25 @@ client.on('message', (channel, tags, message, self) => {
   if (tags.badges.broadcaster || tags.badges.moderator) {
     const [command, ...args] = message.split(' ');
     if (command === '!settopic') {
-      topicElement.style.display = '';
       const topic = args.join(' ');
-      topicElement.textContent = topic;
+      setTopicOverlayText(topic);
+      showTopicOverlay();
     } else if (command === '!hidetopic') {
-      topicElement.style.display = 'none';
+      hideTopicOverlay();
     } else if (command === '!showtopic') {
-      topicElement.style.display = '';
+      showTopicOverlay();
     }
   }
 });
+
+function showTopicOverlay(){
+  topicElement.style.display = '';
+}
+
+function hideTopicOverlay(){
+  topicElement.style.display = 'none';
+}
+
+function setTopicOverlayText(text){
+  topicElement.textContent = text;
+}
